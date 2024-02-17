@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 import json
 import openai
-from .models import Chat
 from django.contrib import auth
 from django.contrib.auth.models import User
 
@@ -23,7 +22,8 @@ def index(request):
 
 
 def generate(request):
-    prompt = 'сгенерируй 6 универсальных и уникальных идей с необычным геймплеем для образовательных игр по теме "математика :Тригонометрия 10 класса " чтобы можно было поиграть в классе с учениками, игра должна быть реализуема в рамках обычного класса и не должна использовать дополнительные вещи как виртуальная реальность, программы построения лабиринты и тд. Напиши ответ на русском языке в точном формате словаря со словарями файла без лишних слов и символов с ключами Name. Detailed description of game, Detailed discription of game rules'
+    topic = request.session.get('topic', '')
+    prompt = f'сгенерируй 6 универсальных и уникальных идей с необычным геймплеем для образовательных на русском языке игр по теме {topic} чтобы можно было поиграть в классе с учениками, игра должна быть реализуема в рамках обычного класса и не должна использовать дополнительные вещи как виртуальная реальность, программы построения лабиринты и тд. Напиши ответ  в точном формате словаря со словарями файла без лишних слов и символов с ключами используй только словари Name. Detailed description of game, Detailed discription of game rules'
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
@@ -73,6 +73,11 @@ def register(request):
             error_message = "Password don't match"
             return render(request, 'register.html', {'error_message': error_message})
     return render(request, 'register.html')
+
+
+
+
+
 
 
 def logout(request):
