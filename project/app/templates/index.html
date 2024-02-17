@@ -12,9 +12,9 @@
         <div class="topic">
             <form method="POST">
                 {% csrf_token %}
-                <label for="topic">Тема урока:</label><br>
-                <input type="text" id="topic" name="topic"><br>
-                <input type="submit" value="Сгенерировать">
+                <label for="topic" class="title">Тема урока:</label>
+                <input type="text" id="topic" name="topic" class="input">
+                <input type="submit" value="Сгенерировать" class="button">
             </form>
         </div>
     </div>
