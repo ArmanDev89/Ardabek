@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+import json
 import openai
 from .models import Chat
 from django.contrib import auth
 from django.contrib.auth.models import User
 
 from django.utils import timezone
+
 openai_api_key = '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'  # Replace YOUR_API_KEY with your openai apikey
 openai.api_key = openai_api_key
 
@@ -21,21 +22,20 @@ def index(request):
         return redirect('generate')
 
 
-
 def generate(request):
-    # Генерация ответа с помощью модели GPT-3.5-turbo
-    topic = request.session.get('topic')
-    prompt = f"сгенерируй 6 универсальных и уникальных идей с необычным геймплеем для образовательных игр по теме {topic} чтобы можно было поиграть в классе с учениками, игра должна быть реализуема в рамках обычного класса и не должна использовать дополнительные вещи как виртуальная реальность, программы построения лабиринты и тд. Напиши конечный ответ как JSON  файл с  Name, Detailed Description of  game, Detailed Description of game rules"
+    prompt = 'сгенерируй 6 универсальных и уникальных идей с необычным геймплеем для образовательных игр по теме "математика :Тригонометрия 10 класса " чтобы можно было поиграть в классе с учениками, игра должна быть реализуема в рамках обычного класса и не должна использовать дополнительные вещи как виртуальная реальность, программы построения лабиринты и тд. Напиши ответ в точном формате словаря со словарями файла без лишних слов и символов с ключами Name. Detailed description of game, Detailed discription of game rules'
     response = openai.ChatCompletion.create(
-      model="gpt-3.5-turbo",
-      messages=[
+        model="gpt-3.5-turbo",
+        messages=[
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": prompt},
         ]
     )
     ideas = response['choices'][0]['message']['content']
-    return render(request, 'generate.html', {'ideas': ideas})
+    ideas = json.loads(ideas)
+    # Преобразование ответа в список словарей
 
+    return render(request, 'generate.html', {'ideas': ideas})
 
 
 def login(request):

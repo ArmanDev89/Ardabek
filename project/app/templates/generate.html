@@ -8,6 +8,15 @@
 
 {% block content %}
 <h1>Сгенерированные идеи</h1>
-    <p>{{ ideas }}</p>
+    <div>
+    {% for key, value in ideas.items %}
+        {% for key, idea in value.items %}
+            <div>
+                <h2>{{ key }}</h2>
+                <p>{{ idea }}</p>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    </div>
 
 {% endblock %}
