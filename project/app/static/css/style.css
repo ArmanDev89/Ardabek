@@ -1,0 +1,41 @@
+.wrapper{
+    padding-top: 40vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.title{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
+}
+
+.input {
+    width: 13vw;
+    height: 2.5vw;
+    outline: none;
+    padding-left: 10px;
+    font-size: 20px;
+    border-radius: 20px;
+    display: block;
+    margin-top: 1vw;
+    font-family: "Montserrat", sans-serif;
+}
+
+.button{
+    font-family: "Montserrat", sans-serif;
+    display: block;
+    width: 13vw;
+    height: 2.5vw;
+    border-radius: 20px;
+    margin-top: 0.5vw;
+    background-color: black;
+    border: none;
+    color: #fff;
+    transition: .5s ease;
+}
+
+button:hover{
+    background-color: purple;
+    transform: scale(1.02);
+}
