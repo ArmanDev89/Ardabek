@@ -1,10 +1,41 @@
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
+import openai
+from .models import Chat
 from django.contrib import auth
 from django.contrib.auth.models import User
 
+from django.utils import timezone
+openai_api_key = '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'  # Replace YOUR_API_KEY with your openai apikey
+openai.api_key = openai_api_key
+
 
 def index(request):
-    return render(request, 'index.html')
+    if request.method == 'GET':
+        return render(request, 'index.html')
+
+    # Обработка данных формы
+    elif request.method == 'POST':
+        topic = request.POST.get('topic')
+        request.session['topic'] = topic
+        return redirect('generate')
+
+
+
+def generate(request):
+    # Генерация ответа с помощью модели GPT-3.5-turbo
+    topic = request.session.get('topic')
+    prompt = f"сгенерируй 6 универсальных и уникальных идей с необычным геймплеем для образовательных игр по теме {topic} чтобы можно было поиграть в классе с учениками, игра должна быть реализуема в рамках обычного класса и не должна использовать дополнительные вещи как виртуальная реальность, программы построения лабиринты и тд. Напиши конечный ответ как JSON  файл с  Name, Detailed Description of  game, Detailed Description of game rules"
+    response = openai.ChatCompletion.create(
+      model="gpt-3.5-turbo",
+      messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": prompt},
+        ]
+    )
+    ideas = response['choices'][0]['message']['content']
+    return render(request, 'generate.html', {'ideas': ideas})
+
 
 
 def login(request):
