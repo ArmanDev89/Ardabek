@@ -34,7 +34,7 @@ input[type="text"]:focus {
 .button{
     font-family: "Montserrat", sans-serif;
     font-size: 1vw;
-    width: 16.95vw;    
+    width: 16vw;    
     height: 3vw;
     border-radius: 1vw;
     margin-top: 0.5vw;
@@ -52,11 +52,71 @@ input[type="submit"]:hover{
 
 .ideas{
     width: 100vw;
+    display: grid;
+    grid-template-columns: 25vw 25vw 25vw;
+    margin-left: 9.5vw;
+    gap: 3vw;
+    text-align: center;
 }
 
-.card {
-    width: calc(33.33% - 20px);
-    margin: 10px;
-    box-sizing: border-box;
-    float: left;
+.idea-title{
+    text-align: center;
+    margin: 2vw 0 2vw 0;
+    font-size: 4vw;
+}
+
+.card{
+    width: 25vw;
+    height: 37vw;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    border-radius: 1vw;
+    border: 0.2vw solid black;
+    position: relative;
+}
+
+.card-title{
+    padding: 2vw 0 1vw 0;
+    font-size: 2.5vw;
+    width: 22vw;
+    margin: 0 auto;
+}
+
+.card-description{
+    font-family: "Montserrat", sans-serif;
+    width: 22vw;
+    margin: 0 auto;
+    font-size: 1.2vw;
+    font-weight: normal;
+}
+
+.card-button{
+    position: absolute;
+    left: 4.5vw;
+    bottom: 2vw;
+    margin: 0 auto;
+}
+
+.card-button:hover{
+    background-color: purple;
+    transform: scale(1.02);
+}
+
+.idea-title{
+    text-align: center;
+    margin: 5vw auto 2vw;
+}
+
+.games{
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 25vw 25vw 25vw;
+    margin-left: 9.5vw;
+    gap: 3vw;
+    text-align: center;
+}
+
+.game-card{
+    width: 25vw;
+    height: 30vw;
 }

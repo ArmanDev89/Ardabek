@@ -7,33 +7,50 @@
 {% endblock %}
 
 {% block content %}
-<h1>Сгенерированные идеи</h1>
-    <div>
+<h1 class="title idea-title">Сгенерированные идеи</h1>
+    <div class="ideas">
     {% for key, value in ideas.items %}
-        {% for key, idea in value.items %}
-            {% if key == "Name" %}
-                <h2>
-                {{ idea }}
-                </h2>
-            {% endif %}
-            {% if key == "Detailed description of game" %}
-                <p>
-                {{ idea }}
-                </p>
-            {% endif %}
-        {% endfor %}
+        <div class="card">
+            {% for key, idea in value.items %}
+                {% if key == "Name" %}
+                    <h2 class="card-title">
+                    {{ idea }}
+                    </h2>
+                {% endif %}
+                {% if key == "Detailed description of game" %}
+                    <p class="card-description">
+                    {{ idea }}
+                    </p>
+                {% endif %}
+            {% endfor %}
+            <a href="#"><button class="button card-button">Подробнее</button></a>
+        </div>
     {% endfor %}
-    </div>
+    </div>    
+    <h1 class="title idea-title">Готовые идеи</h1>
+    <div class="games">
+        <div class="card game-card">
+            <div class="card-title">Анти-акинатор</div>
+            <p class="card-description">
+                Игра в телеграме, где вы становитесь в роли акинатора. Учитель загадывает термин и вы задавая вопросы и используя подсказки должны отгадать его. Рейтинг учащихся ведется в завсимости от того, сколько попыток, времени и подсказок он потратил.
+            </p>
+            <a href="#"><button class="button card-button">Играть</button></a>
+        </div>
 
-    <div>
-    Анти-Акинатор
-    </div>
+        <div class="card game-card">
+            <div class="card-title">Морской бой</div>
+            <p class="card-description">
+                Решай задачи на время и делай ход! На сколько быстро вы ответите на вопрос, настолько быстро сможете разгромить вражеский флот и одержать победу!
+            </p>
+            <a href="#"><button class="button card-button">Играть</button></a>
+        </div>
 
-    <div>
-    Морской бой
-    </div>
-
-    <div>
-    Царь горы
+        <div class="card game-card">
+            <div class="card-title">Царь горы</div>
+            <p class="card-description">
+                Используйте свой стратегический ум, решайте задачи , чтобы одолеть каждого из конкурентов и остаться царем горы!
+            </p>
+            <a href="#"><button class="button card-button">Играть</button></a>
+        </div>
     </div>
 {% endblock %}
