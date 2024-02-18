@@ -22,21 +22,24 @@ def index(request):
 
 
 def generate(request):
-    topic = request.session.get('topic', '')
-    prompt = f'сгенерируй 6 универсальных и уникальных идей с необычным геймплеем для образовательных на русском языке игр по теме {topic} чтобы можно было поиграть в классе с учениками, игра должна быть реализуема в рамках обычного класса и не должна использовать дополнительные вещи как виртуальная реальность, программы построения лабиринты и тд. Напиши ответ  в точном формате словаря с 6  словарями файла без лишних слов и символов с ключами используй только словари.Все ключи и данные должны быть внутри "". Вот ключи для словарей Name. Detailed description of game, Detailed discription of game rules'
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": prompt},
-        ]
-    )
-    ideas = response['choices'][0]['message']['content']
-    ideas = json.loads(ideas)
-    # Преобразование ответа в список словарей
+    try:
+        topic = request.session.get('topic', '')
+        prompt = f'сгенерируй 6 универсальных и уникальных идей с необычным геймплеем для образовательных на русском языке игр по теме {topic} чтобы можно было поиграть в классе с учениками, игра должна быть реализуема в рамках обычного класса и не должна использовать дополнительные вещи как виртуальная реальность, программы построения лабиринты и тд. Напиши ответ  в точном формате словаря с 6  словарями файла без лишних слов и символов с ключами используй только словари.Все ключи и данные должны быть внутри "". Вот ключи для словарей Name. Detailed description of game, Detailed discription of game rules'
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": prompt},
+            ]
+        )
+        ideas = response['choices'][0]['message']['content']
+        ideas = json.loads(ideas)
+        # Преобразование ответа в список словарей
 
-    return render(request, 'generate.html', {'ideas': ideas})
-
+        return render(request, 'generate.html', {'ideas': ideas})
+    except json.decoder.JSONDecodeError:
+        print("ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR")
+        return render(request, 'generate.html')
 
 def login(request):
     if request.method == 'POST':
