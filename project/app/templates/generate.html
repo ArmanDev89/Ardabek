@@ -11,10 +11,16 @@
     <div>
     {% for key, value in ideas.items %}
         {% for key, idea in value.items %}
-            <div>
-                <h2>{{ key }}</h2>
-                <p>{{ idea }}</p>
-            </div>
+            {% if key == "Name" %}
+                <h2>
+                {{ idea }}
+                </h2>
+            {% endif %}
+            {% if key == "Detailed description of game" %}
+                <p>
+                {{ idea }}
+                </p>
+            {% endif %}
         {% endfor %}
     {% endfor %}
     </div>

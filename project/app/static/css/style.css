@@ -50,3 +50,13 @@ input[type="submit"]:hover{
     transform: scale(1.02);
 }
 
+.ideas{
+    width: 100vw;
+}
+
+.card {
+    width: calc(33.33% - 20px);
+    margin: 10px;
+    box-sizing: border-box;
+    float: left;
+}
