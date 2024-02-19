@@ -1,0 +1,1 @@
+Библиотеки: django, telebot, openai
